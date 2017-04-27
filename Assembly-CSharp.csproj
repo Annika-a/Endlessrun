@@ -45,12 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Bomb.cs" />
-     <Compile Include="Assets\CreateGround.cs" />
-     <Compile Include="Assets\GroundPart.cs" />
-     <Compile Include="Assets\bgmove.cs" />
-     <Compile Include="Assets\destroyafter.cs" />
-     <Compile Include="Assets\runner.cs" />
+     <Compile Include="Assets\Scripts\Bomb.cs" />
+     <Compile Include="Assets\Scripts\CreateGround.cs" />
+     <Compile Include="Assets\Scripts\GroundPart.cs" />
+     <Compile Include="Assets\Scripts\bgmove.cs" />
+     <Compile Include="Assets\Scripts\destroyafter.cs" />
+     <Compile Include="Assets\Scripts\runner.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
