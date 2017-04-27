@@ -17,12 +17,14 @@ public class CreateGround : MonoBehaviour {
 	float lastTileTime = 0;
 	float Speed = 2;
 	float bgSpeed = 1;
-	GameObject gameOverscreen;
+
+	public AudioClip audioDie;
+	new AudioSource audio;
+
 	public bool gameoverb = false;
 
-
 	void Start () {
-		speedChangeDif = 20;
+		speedChangeDif = 15;
 
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag("ground");
@@ -46,6 +48,7 @@ public class CreateGround : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.R) && gameoverb) {
 			Gamerestart ();
 			gameoverb = false;
+			speedChangeDif = 15;
 
 			GameObject[] gos;
 			gos = GameObject.FindGameObjectsWithTag("ground");
@@ -65,12 +68,11 @@ public class CreateGround : MonoBehaviour {
 		}
 
 		if (!gameoverb) {
-	
 			gameTime += Time.deltaTime;
 
 		if (gameTime - lastgametime > speedChangeDif ){
 			lastgametime = gameTime;
-			Debug.Log ("speedChangeDif "+speedChangeDif );
+			
 
 			speedChangeDif = speedChangeDif/1.2f;
 			Speed *= 1.2f;
@@ -100,7 +102,6 @@ public class CreateGround : MonoBehaviour {
 					Scriptt3.speed = bgSpeed;
 				}
 		}
-		
 
 		if (gameTime - lastTileTime > 7f/Speed){
 		
@@ -108,13 +109,8 @@ public class CreateGround : MonoBehaviour {
 			newground ();
 		}
 
-
 	}
-
-	
-
-
-	}
+}
 
 	void newground(){
 	
@@ -122,60 +118,54 @@ public class CreateGround : MonoBehaviour {
 		GroundPart Scriptt = clone.GetComponent<GroundPart>();
 		Scriptt.speed = Speed;
 
-
 		if(Random.Range(0,4) < 3 ){
 			GameObject bclone = Instantiate(bombObject);
 			Bomb Scripttb = bclone.GetComponent<Bomb>();
 			Scripttb.speed = Speed;
 		}
-	
 	}
-
 
 	void OnGUI() {
 
 		float seconds = gameTime;
 		GUI.Label(new Rect(40,40,450,400), " " + Mathf.RoundToInt(seconds), gstyle);
-
 	}
-
 
 	public void Gameover (){
 
 		if (!gameoverb) {
-			gameOverscreen  = Instantiate(gameOver);
-			GameObject explosionx = Instantiate(explosion);
-		gameoverb = true;
-		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag("ground" );
-		foreach (GameObject go in gos)
-		{
-			GroundPart Scriptt = go.GetComponent<GroundPart>();
-			Scriptt.speed = 0;
-		}
+			audio = GetComponent<AudioSource>();
+			audio.PlayOneShot(audioDie, 1F);
 
-		GameObject[] gos2;
-		gos2 = GameObject.FindGameObjectsWithTag("bomb" );
-		foreach (GameObject gof in gos2)
-		{
-			Bomb Scripttf = gof.GetComponent<Bomb>();
-			Scripttf.speed = 0;
-		}
-			GameObject[] gos3;
-			gos3 = GameObject.FindGameObjectsWithTag("background");
-			foreach (GameObject go3 in gos3)
-			{
-				bgmove Scriptt3 = go3.GetComponent<bgmove>();
-				Scriptt3.speed = 0;
-			}
+			Instantiate(gameOver);
+			Instantiate(explosion);
+			gameoverb = true;
+			GameObject[] gos;
+			gos = GameObject.FindGameObjectsWithTag("ground" );
+				foreach (GameObject go in gos)
+				{
+					GroundPart Scriptt = go.GetComponent<GroundPart>();
+					Scriptt.speed = 0;
+				}
 
-		
-	
+				GameObject[] gos2;
+				gos2 = GameObject.FindGameObjectsWithTag("bomb" );
+				foreach (GameObject gof in gos2)
+				{
+					Bomb Scripttf = gof.GetComponent<Bomb>();
+					Scripttf.speed = 0;
+				}
+				GameObject[] gos3;
+				gos3 = GameObject.FindGameObjectsWithTag("background");
+				foreach (GameObject go3 in gos3)
+				{
+					bgmove Scriptt3 = go3.GetComponent<bgmove>();
+					Scriptt3.speed = 0;
+				}
 		}
 	}
 
 	public void Gamerestart (){
-
 
 		GameObject[] gos2;
 		gos2 = GameObject.FindGameObjectsWithTag("bomb" );

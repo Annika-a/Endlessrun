@@ -1,0 +1,1 @@
+ -O3  -g2  --memory-init-file "0"  -o "endlessrun1.js"    -s PRECISE_F32=2  -s DISABLE_EXCEPTION_CATCHING=0   -s NO_EXIT_RUNTIME=1 -s ASSERTIONS=1 -s USE_WEBGL2=1 -s TOTAL_MEMORY=268435456 --emit-symbol-map -s SIDE_MODULE=1 -s ASM_JS=2  "Native/UserAssembly.bc"
